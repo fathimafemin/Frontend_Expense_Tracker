@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import profileImg from "../assets/image.png";
 
 function Dashboard() {
+  const API_URL = import.meta.env.VITE_API_URL;
   const [expenses, setExpenses] = useState([]);
   const [showModal, setShowModal] = useState(false);
   const [view, setView] = useState("expenses");
@@ -47,7 +48,7 @@ const years = [currentYear, currentYear - 1, currentYear - 2];
   try {
     const token = localStorage.getItem("token");
 
-    const res = await axios.get("http://127.0.0.1:8000/expenses", {
+    const res = await axios.get(`${API_URL}/expenses`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -63,7 +64,7 @@ const addExpense = async () => {
     const token = localStorage.getItem("token");
 
     await axios.post(
-      "http://127.0.0.1:8000/expenses",
+      `${API_URL}/expenses`,
       {
         amount,
         category,
@@ -87,7 +88,7 @@ const deleteExpense = async (id) => {
   try {
     const token = localStorage.getItem("token");
 
-    await axios.delete(`http://127.0.0.1:8000/expenses/${id}`, {
+    await axios.delete(`${API_URL}${id}`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
