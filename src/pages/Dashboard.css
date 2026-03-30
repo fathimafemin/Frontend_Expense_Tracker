@@ -1,19 +1,17 @@
+.dashboard-container {
+  display: flex;
+  min-height: 100vh;
+  width: 100%;
+}
 .dashboard-header {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-between; 
   align-items: center;
-  font-family:'Poppins', sans-serif;
-  max-width: 700px;
-  color:black;
-  margin: 0 auto;
-  flex-direction: column; 
-  align-items: center;
+  padding: 10px;
+  width: 100%;
 }
 .dashboard-title {
   text-align: center;
-}
-.dashboard-container {
-  padding: 20px;
 }
 
 .btn-container {
@@ -24,28 +22,36 @@
 }
 
 .dashboard-grid {
-  display: flex;
-  flex-direction: column;
-  align-items: center; 
-  gap: 11px;
-  margin-top: 75px;
-  
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); 
+  gap: 20px;
+  width: 100%;
+  margin-top: 20px;
 }
 
 .dashboard-card {
-  width: 100%;
-  max-width: calc(100% - 220px);
   background: white;
-  padding: 15px;
-  border-radius: 10px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
   display: flex;
+  flex-direction: column; 
   justify-content: space-between;
-  align-items: center;
+  border: 1px solid #f0f0f0;
+  transition: transform 0.2s;
 }
-
-.card h3 {
-  margin: 0;
+.dashboard-card:hover {
+  transform: translateY(-5px);
+}
+/* Make sure the text inside looks clean */
+.dashboard-card h3 {
+  margin: 0 0 10px 0;
+  font-size: 1.1rem;
+  text-transform: capitalize;
+}
+.dashboard-card p {
+  margin: 5px 0;
+  color: #666;
 }
 
 
@@ -144,23 +150,22 @@
   display: flex;
 }
 
-/* Sidebar */
 .sidebar {
-  width: 220px;
-  height: 100vh;
-  background: #f5f5f5;  /* off-white */
-  padding: 20px;
+  width: 240px;
+  background: #f8f9fa;
+  padding: 30px 20px;
   display: flex;
   flex-direction: column;
   gap: 15px;
-  position: fixed;
+  border-right: 1px solid #eee;
+ 
 }
 
 /* Oval buttons */
 .nav-btn {
   border: none;
   padding: 10px;
-  border-radius: 20px;  /* ⭐ oval shape */
+  border-radius: 20px;  
   background: white;
   cursor: pointer;
   font-size: 14px;
@@ -212,14 +217,11 @@
   font-size: 13px;
   color: gray;
 }
-/* Right side container */
 .header-right {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 20px;
 }
-
-
 
 /* Dropdown */
 .profile-dropdown {
@@ -286,16 +288,18 @@
   top: 20px;
 }
 .main-content {
-  margin-left: 220px;   /* ⭐ same as sidebar width */
-  width: calc(100% - 220px);  /* fill remaining space */
-  min-height: 100vh;
-  padding: 20px;
-  background: #fafafa;  /* light background */
+  flex: 1;
+  padding: 40px;
+  background: #ffffff;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
 .add-expenses {
   display: flex;
   justify-content: flex-end;
   margin: 10px 20px;
+  margin-top: 20px;
 }
 
 /* Main pill */
@@ -307,7 +311,7 @@
   width: 120px;
   padding: 5px;
 
-  background: #101112;   /* bluish like your image */
+  background: #101112;  
   border-radius: 30px;
   border: none;
   cursor: pointer;
@@ -339,4 +343,56 @@
   position: absolute; 
   right: 100px; 
   top: 145px;
+}
+.action-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 20px;
+  width: 100%;
+}
+@media (max-width: 768px) {
+  .main-content {
+    margin-left: 0;
+    width: 100%;
+    padding: 15px; 
+    box-sizing: border-box; 
+    display: flex;
+    flex-direction: column;
+  }
+
+  
+  .action-bar {
+    display: flex;
+    flex-direction: row; 
+    justify-content: space-between; 
+    align-items: flex-end;
+    width: 100%; 
+    margin: 20px 0;
+    position: relative;
+  }
+  .filter-container {
+    display: flex;
+    gap: 8px;
+    justify-content: flex-end; 
+    margin: 0; 
+  }
+
+  .add-pill-container {
+    position: static !important; 
+    margin-right: auto; 
+  }
+
+  .profile-container {
+    position: absolute;
+    top: 10px;
+    left: 350px;
+  }
+  .dashboard-cards {
+    width: 100%;
+    max-width: 350px;
+    padding: 15px;
+    box-sizing: border-box; 
+    overflow: hidden; 
+  }
 }

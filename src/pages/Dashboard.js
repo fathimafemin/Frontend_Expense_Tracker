@@ -183,6 +183,7 @@ const handleLogout = () => {
   <h2 className="dashboard-title">
     {view === "expenses" ? "My Expenses" : "Analytics"}
   </h2>
+  </div>
 
   <div className="header-right">
 
@@ -213,7 +214,7 @@ const handleLogout = () => {
     </button>
   </div>
 )}
-    </div>
+    
     </div>
 
     {/* Profile */}
