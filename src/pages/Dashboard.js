@@ -7,7 +7,7 @@ import profileImg from "../assets/image.png";
 
 function Dashboard() {
   const API_URL = import.meta.env.VITE_API_URL;
-  const baseUrl = API_URL || "https://backend-expense-tracker-6.onrender.com";
+  const baseUrl = API_URL
   const [expenses, setExpenses] = useState([]);
   const [showModal, setShowModal] = useState(false);
   const [view, setView] = useState("expenses");
