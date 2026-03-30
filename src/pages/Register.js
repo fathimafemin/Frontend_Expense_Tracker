@@ -11,7 +11,7 @@ function Register() {
 
   const handleRegister = async () => {
     try {
-      console.log("API_URL:", API_URL);
+      
       await axios.post(`${API_URL}/register`, {
         email,
         password,
@@ -31,9 +31,7 @@ function Register() {
     }
     alert(error.response.data.detail); //show backend message
 }
-   
-}
-    
+     
   };
 
   return (
