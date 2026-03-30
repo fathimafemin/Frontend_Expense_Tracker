@@ -11,6 +11,7 @@ function Register() {
 
   const handleRegister = async () => {
     try {
+      console.log("API_URL:", API_URL);
       await axios.post(`${API_URL}/register`, {
         email,
         password,
@@ -20,9 +21,17 @@ function Register() {
       navigate("/");
     }
    catch (error) {
-   console.log(error.response.data);
+    console.log("FULL ERROR:", error);
 
-   alert(error.response.data.detail); //show backend message
+    if (error.response) {
+      console.log(error.response.data);
+      alert(error.response.data.detail || "Registration failed");
+    } else {
+      alert("Server not reachable / Network error");
+    }
+    alert(error.response.data.detail); //show backend message
+}
+   
 }
     
   };
