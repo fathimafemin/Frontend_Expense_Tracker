@@ -7,6 +7,7 @@ import profileImg from "../assets/image.png";
 
 function Dashboard() {
   const API_URL = import.meta.env.VITE_API_URL;
+  const baseUrl = API_URL || "https://backend-expense-tracker-6.onrender.com";
   const [expenses, setExpenses] = useState([]);
   const [showModal, setShowModal] = useState(false);
   const [view, setView] = useState("expenses");
@@ -48,7 +49,7 @@ const years = [currentYear, currentYear - 1, currentYear - 2];
   try {
     const token = localStorage.getItem("token");
 
-    const res = await axios.get(`${API_URL}/expenses`, {
+    const res = await axios.get(`${baseUrl}/expenses`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -64,7 +65,7 @@ const addExpense = async () => {
     const token = localStorage.getItem("token");
 
     await axios.post(
-      `${API_URL}/expenses`,
+      `${baseUrl}/expenses`,
       {
         amount,
         category,
@@ -88,7 +89,7 @@ const deleteExpense = async (id) => {
   try {
     const token = localStorage.getItem("token");
 
-    await axios.delete(`${API_URL}/expenses/${id}`, {
+    await axios.delete(`${baseUrl}/expenses/${id}`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },

@@ -5,13 +5,14 @@ import "./Login.css";
 
 function Login() {
   const API_URL = import.meta.env.VITE_API_URL;
+  const baseUrl = API_URL || "https://backend-expense-tracker-6.onrender.com";
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
 
   const handleLogin = async () => {
     try {
-      const res = await axios.post(`${API_URL}/login`, {
+      const res = await axios.post(`${baseUrl}/login`, {
         email,
         password,
       });
