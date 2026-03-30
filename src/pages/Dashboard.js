@@ -88,7 +88,7 @@ const deleteExpense = async (id) => {
   try {
     const token = localStorage.getItem("token");
 
-    await axios.delete(`${API_URL}${id}`, {
+    await axios.delete(`${API_URL}/expenses/${id}`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
