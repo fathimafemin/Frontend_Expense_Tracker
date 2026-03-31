@@ -60,8 +60,11 @@ const years = [currentYear, currentYear - 1, currentYear - 2];
     console.log(err);
   }
 };
+const [message, setMessage] = useState("");
+const [loading, setLoading] = useState(false);
 const addExpense = async () => {
   try {
+    setLoading(true);
     const token = localStorage.getItem("token");
 
     await axios.post(
@@ -78,13 +81,17 @@ const addExpense = async () => {
         },
       }
     );
-
+    setMessage("Expense added successfully!");
     setShowModal(false);  
     fetchExpenses();      
-  } catch (err) {
-    console.log(err);
+    } catch (err){
+      console.log(err);
+    alert("Failed to add expense ❌");
+  } finally {
+    setLoading(false); // stop loading
   }
 };
+  
 const deleteExpense = async (id) => {
   try {
     const token = localStorage.getItem("token");
@@ -402,7 +409,9 @@ const handleLogout = () => {
         onChange={(e) => setNotes(e.target.value)}
       />
 
-      <button onClick={addExpense}>Save</button>
+      <button onClick={addExpense} disabled={loading}>
+      {loading ? "Saving..." : "Save"}
+      </button>
       <button onClick={() => setShowModal(false)}>Cancel</button>
     </div>
   </div>

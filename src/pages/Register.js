@@ -9,10 +9,11 @@ function Register() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
 
   const handleRegister = async () => {
     try {
-      
+      setLoading(true);
       await axios.post(`${baseUrl}/register`, {
         email,
         password,
@@ -21,19 +22,16 @@ function Register() {
       alert("Registered successfully");
       navigate("/");
     }
-   catch (error) {
-    console.log("FULL ERROR:", error);
-
+    catch (error) {
     if (error.response) {
-      console.log(error.response.data);
       alert(error.response.data.detail || "Registration failed");
     } else {
-      alert("Server not reachable / Network error");
+      alert("Server not reachable");
     }
-    alert(error.response.data.detail); //show backend message
-}
-     
-  };
+  } finally {
+    setLoading(false);
+  }
+};
 
   return (
   <div className="container">
@@ -56,8 +54,8 @@ function Register() {
         onChange={(e) => setPassword(e.target.value)}
       />
 
-      <button className="button" onClick={handleRegister}>
-        Signup
+      <button className="button" onClick={handleRegister}disabled={loading}>
+        {loading ? "Signing up..." : "Signup"}
       </button>
     </div>
   </div>

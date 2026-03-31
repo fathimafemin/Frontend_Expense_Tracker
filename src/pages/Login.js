@@ -9,21 +9,25 @@ function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
 
   const handleLogin = async () => {
     try {
+      setLoading(true);
       const res = await axios.post(`${baseUrl}/login`, {
         email,
         password,
       });
 
       localStorage.setItem("token", res.data.access_token);
-
+      alert("Login successful ✅");
       navigate("/dashboard");
-    } catch (err) {
-      alert("Incorrect Credentials");
-    }
-  };
+    } catch (error) {
+    alert(error.response?.data?.detail || "Login failed ❌");
+  } finally {
+    setLoading(false);
+  }
+};
 
   return (
   <div className="container">
@@ -46,10 +50,9 @@ function Login() {
         onChange={(e) => setPassword(e.target.value)}
       />
 
-      <button className="button" onClick={handleLogin}>
-        Login
+      <button className="button" onClick={handleLogin}disabled={loading}>
+        {loading ? "Logging in..." : "Login"}
       </button>
-      
     <p className="signup-text">
   Don't have an account?{" "}
   <span className="signup-link" onClick={() => navigate("/register")}>
